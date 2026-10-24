@@ -91,7 +91,7 @@ jobs:
           # e.g. "clbsoldev/docker-syslog-logdy-server" -> "syslog-logdy-server"
           # (strips a leading "docker-" repo-naming prefix, if present, lowercase)
           REPO_NAME="${GITHUB_REPOSITORY##*/}"
-          REPO_NAME="${REPO_NAME#docker-}"
+          # REPO_NAME="${REPO_NAME#docker-}"
           echo "image_name=${REPO_NAME,,}" >> "$GITHUB_OUTPUT"
 
       - name: Push to GHCR
