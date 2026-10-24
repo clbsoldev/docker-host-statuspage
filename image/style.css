@@ -1,0 +1,165 @@
+/* ── docker status page · aligned with clbsoldev shared stylesheet ── */
+
+:root {
+  --bg:        #0a0e14;
+  --surface:   #111620;
+  --border:    #1e2a3a;
+  --accent:    #00d4ff;
+  --accent2:   #0077a8;
+  --text:      #c8d8e8;
+  --text-dim:  #5a7a94;
+  --text-head: #e8f4ff;
+  --green:     #00e5a0;
+  --orange:    #ff8c42;
+  --red:       #ff4d6d;
+  --mono:      'IBM Plex Mono', monospace;
+  --sans:      'IBM Plex Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Scanline overlay — matches shared site texture */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,.08) 2px, rgba(0,0,0,.08) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── HEADER — mirrors .site-nav brand pattern ("// CLBSOLDEV") ── */
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10,14,20,.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .5rem;
+  padding: .9rem 2rem;
+}
+
+.brand {
+  font-family: var(--mono);
+  font-size: .85rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex;
+  align-items: baseline;
+  gap: .6rem;
+}
+
+.brand .slashes { color: var(--text-dim); }
+.brand .initials { color: var(--accent); }
+.brand .host-name { color: var(--text-head); font-weight: 600; }
+
+.status-meta {
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.status-meta .count { color: var(--green); }
+.status-meta #countdown { color: var(--accent); }
+
+/* ── MAIN / GRID ── */
+main { flex: 1; padding: 2.5rem 2rem; max-width: 1200px; margin: 0 auto; width: 100%; }
+
+.eyebrow {
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .2em;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: .75rem;
+}
+.eyebrow::before {
+  content: ''; display: inline-block;
+  width: 32px; height: 1px; background: var(--accent);
+}
+
+h1 {
+  font-family: var(--mono);
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  font-weight: 600; color: var(--text-head);
+  line-height: 1.15; margin-bottom: 2.5rem; letter-spacing: -.02em;
+}
+h1 .accent { color: var(--accent); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 240px));
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .grid { justify-content: center; }
+}
+
+/* ── CARD — matches shared .card pattern ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.25rem 1.5rem;
+  transition: border-color .2s;
+  text-align: center;
+}
+.card:hover { border-color: var(--accent2); }
+
+.card-name {
+  font-family: var(--mono);
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text-head);
+  letter-spacing: .02em;
+  word-break: break-word;
+  margin-bottom: .3rem;
+}
+
+.card-image {
+  font-family: var(--mono);
+  font-size: .68rem;
+  color: var(--text-dim);
+  word-break: break-all;
+  margin-bottom: .9rem;
+}
+
+/* ── STATUS BADGE — matches shared .badge pattern ── */
+.status-badge {
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .3rem .75rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.running .status-badge { border-color: var(--green); color: var(--green); }
+.stopped .status-badge  { border-color: var(--red);   color: var(--red); }
+
+/* ── FOOTER — matches shared .site-footer ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 1.25rem 2rem;
+  font-family: var(--mono);
+  font-size: .68rem;
+  color: var(--text-dim);
+  text-align: center;
+}
